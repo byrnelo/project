@@ -3,7 +3,7 @@
 {{! Roll the Dice Database }}
 {{! For Games }}
 {{! Citations: }}
-{{!Structures and Setup:}} 
+{{!Structures and Setup:}}
 {{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
 {{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
 {{! Handlebar: }}
@@ -19,7 +19,7 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
 
@@ -29,6 +29,7 @@
             <td>{{this.gameID}}</td>
             <td>{{this.gameName}}</td>
             <td>{{this.description}}</td>
+            <td>{{this.genreName}}</td>
             <td>{{this.minPlayer}}</td>
             <td>{{this.maxPlayer}}</td>
             <td>{{this.quantity}}</td>
