@@ -1,0 +1,65 @@
+{{!Lorraine Byrne and Suhayl Khan }}
+{{! CS 340 Summer 2025 }}
+{{! Roll the Dice Database }}
+{{! For Tables }}
+{{! Citations: }}
+{{!Structures and Setup:}} 
+{{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
+{{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
+{{! Handlebar: }}
+{{! https://handlebarsjs.com/guide/ }}
+
+<h1>Tables</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        <tr>
+            {{#each Tables.[0]}}
+            <th>{{@key}}</th>
+            {{/each}}
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each Tables}}
+        <tr>
+            <td>{{this.tableID}}</td>
+            <td>{{this.maxSeating}}</td>
+            <td>
+                <form class="delete-form" method="POST">
+                    <input type="hidden" name="delete_table_id" value="{{this.tableID}}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add a Table</h2>
+<form class="cuForm" id="create_table_form" method="POST">
+    <label for="create_max_seating">Max Seating:</label>
+    <input type="number" name="create_max_seating" id="create_max_seating" required />
+    <input type="submit" value="Add Table" />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Table</h2>
+<form class="cuForm" id="update_table_form" method="POST">
+    <label for="update_table_id">Table to Update:</label>
+    <select name="update_table_id" id="update_table_id" required>
+        <option value="" disabled selected>Select a Table</option>
+        {{#each Tables}}
+        <option value="{{this.tableID}}">
+            Table {{this.tableID}} - Seats {{this.maxSeating}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for="update_max_seating">New Max Seating:</label>
+    <input type="number" name="update_max_seating" id="update_max_seating" required />
+
+    <input type="submit" value="Update Table" />
+</form>

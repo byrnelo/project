@@ -1,0 +1,62 @@
+{{!Lorraine Byrne and Suhayl Khan }}
+{{! CS 340 Summer 2025 }}
+{{! Roll the Dice Database }}
+{{! For Genres }}
+{{! Citations: }}
+{{!Structures and Setup:}} 
+{{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
+{{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
+{{! Handlebar: }}
+{{! https://handlebarsjs.com/guide/ }}
+<h1>Genres</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        <tr>
+            {{#each Genres.[0]}}
+            <th>{{@key}}</th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each Genres}}
+        <tr>
+            <td>{{this.genreName}}</td>
+            <form id="delete_genres_form">
+                <input type="hidden" name="delete_genres_id" value="{{this.genreID}}" />
+                <input type="hidden" name="delete_genres_name" value="{{this.genreName}}" />
+                <td><button type="submit">Delete</button></td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add a Genre</h2>
+<form class="cuForm" id="create_genre_form">
+    <label for="create_genre_name">Genre:</label>
+    <input type="text" name="create_genre_name" id="create_genre_name" required />
+    <input type="submit" />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Genre</h2>
+<form class="cuForm" id="update_genre_form">
+    <label for="update_genre_id">Genre to Update:</label>
+    <select name="update_genre_id" id="update_genre_id" required>
+        <option value="" disabled selected>Select a Genre</option>
+        {{#each Genres}}
+        <option value="{{this.genreID}}">
+            {{this.genreID}} - {{this.genreName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for="update_genre_name">New Genre Name:</label>
+    <input type="text" name="update_genre_name" id="update_genre_name" required />
+
+    <input type="submit" />
+</form>

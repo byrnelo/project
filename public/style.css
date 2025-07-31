@@ -1,0 +1,52 @@
+/* Lorraine Byrne and Suhayl Khan */
+/* CS 340 Summer 2025 */
+/* Roll the Dice Database */
+/* For Games */
+/* Citations: */
+/* Structures and Setup:*/
+/* https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 */
+/* https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 */
+/* Handlebar: */
+/* https://handlebarsjs.com/guide/ */
+/* Used Chatgtp to find three colors of green - "Give codes for three complementary colors of green" */
+
+h1, h2 { margin-left: 16px;}
+table {border-collapse: collapse;margin-left: 32px;}
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+th {background-color: #f2f2f2;}
+tr:nth-child(even) {background-color: #f9f9f9;}
+.cuForm { margin-left: 32px;}
+input, select { margin-bottom: 4px;margin-right: 12px;}
+nav {background-color: #cecece;padding: 16px;}
+a {margin-left: 16px;}
+.homepageDescription {margin-left: 32px;}
+
+.homepageHeader {
+  background-color: #f0fff4;
+  padding: 40px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(45, 62, 46, 0.15);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 2.5em;
+  color: #2d3e2e; 
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.5em;
+  color: #4a715e;
+  margin-bottom: 20px;
+}
+
+.classinfo {
+  font-size: 1em;
+  color: #678c78; 
+}

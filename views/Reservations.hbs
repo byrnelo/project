@@ -1,0 +1,94 @@
+{{!Lorraine Byrne and Suhayl Khan }}
+{{! CS 340 Summer 2025 }}
+{{! Roll the Dice Database }}
+{{! For Reservations }}
+{{! Citations: }}
+{{!Structures and Setup:}} 
+{{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
+{{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
+{{! Handlebar: }}
+{{! https://handlebarsjs.com/guide/ }}
+
+<h1>Reservations</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        <tr>
+            {{#each Reservations.[0]}}
+            <th>{{@key}}</th>
+            {{/each}}
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each Reservations}}
+        <tr>
+            <td>{{this.reservationID}}</td>
+            <td>{{this.patronID}}</td>
+            <td>{{this.tableID}}</td>
+            <td>{{this.date}}</td>
+            <td>{{this.timeStart}}</td>
+            <td>{{this.timeEnd}}</td>
+            <td>
+                <form class="delete-form" method="POST">
+                    <input type="hidden" name="delete_reservation_id" value="{{this.reservationID}}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add a Reservation</h2>
+<form class="cuForm" id="create_reservation_form" method="POST">
+    <label for="create_patron_id">Patron ID:</label>
+    <input type="number" name="create_patron_id" id="create_patron_id" required />
+
+    <label for="create_table_id">Table ID:</label>
+    <input type="number" name="create_table_id" id="create_table_id" required />
+
+    <label for="create_date">Date:</label>
+    <input type="date" name="create_date" id="create_date" required />
+
+    <label for="create_time_start">Start Time:</label>
+    <input type="time" name="create_time_start" id="create_time_start" required />
+
+    <label for="create_time_end">End Time:</label>
+    <input type="time" name="create_time_end" id="create_time_end" required />
+
+    <input type="submit" value="Add Reservation" />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Reservation</h2>
+<form class="cuForm" id="update_reservation_form" method="POST">
+    <label for="update_reservation_id">Reservation to Update:</label>
+    <select name="update_reservation_id" id="update_reservation_id" required>
+        <option value="" disabled selected>Select a Reservation</option>
+        {{#each Reservations}}
+        <option value="{{this.reservationID}}">
+            Reservation {{this.reservationID}} (Patron {{this.patronID}}, Table {{this.tableID}})
+        </option>
+        {{/each}}
+    </select>
+
+    <label for="update_patron_id">New Patron ID:</label>
+    <input type="number" name="update_patron_id" id="update_patron_id" required />
+
+    <label for="update_table_id">New Table ID:</label>
+    <input type="number" name="update_table_id" id="update_table_id" required />
+
+    <label for="update_date">New Date:</label>
+    <input type="date" name="update_date" id="update_date" required />
+
+    <label for="update_time_start">New Start Time:</label>
+    <input type="time" name="update_time_start" id="update_time_start" required />
+
+    <label for="update_time_end">New End Time:</label>
+    <input type="time" name="update_time_end" id="update_time_end" required />
+
+    <input type="submit" value="Update Reservation" />
+</form>

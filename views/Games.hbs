@@ -1,0 +1,110 @@
+{{!Lorraine Byrne and Suhayl Khan }}
+{{! CS 340 Summer 2025 }}
+{{! Roll the Dice Database }}
+{{! For Games }}
+{{! Citations: }}
+{{!Structures and Setup:}} 
+{{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
+{{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
+{{! Handlebar: }}
+{{! https://handlebarsjs.com/guide/ }}
+<h1>Games</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        <tr>
+            {{#each Games.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#each Games}}
+        <tr>
+            <td>{{this.gameID}}</td>
+            <td>{{this.gameName}}</td>
+            <td>{{this.description}}</td>
+            <td>{{this.minPlayer}}</td>
+            <td>{{this.maxPlayer}}</td>
+            <td>{{this.quantity}}</td>
+
+            <form id="delete_games_form">
+                <input type="hidden" name="delete_games_id" value="{{this.gameID}}" />
+                <input type="hidden" name="delete_games_name" value="{{this.gameName}}" />
+                <td><button type="submit">Delete</button></td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add a Games</h2>
+<form class='cuForm' id='create_game_form'>
+    <label for='create_game_name'>Game:</label>
+    <input type='text' name='create_game_name' id='create_game_name' required />
+
+    <label for='create_game_description'>Description:</label>
+    <input type='text' name='create_game_description' id='create_game_description' />
+
+    <label for='create_game_genre'>Genre:</label>
+    <select name='create_game_genre' id='create_game_genre'>
+        <option value='NULL' selected>Select a Genre</option>
+        <option value='NULL'>&lt; None &gt;</option>
+        {{#each genres}}
+        <option value='{{this.genreID}}'>{{this.genreName}}</option>
+        {{/each}}
+    </select>
+
+    <label for='create_game_min'>Min Players:</label>
+    <input type='number' name='create_game_min' id='create_game_min' min='1' required />
+
+    <label for='create_game_max'>Max Players:</label>
+    <input type='number' name='create_game_max' id='create_game_max' min='1' required />
+
+    <label for='create_game_quantity'>Quantity:</label>
+    <input type='number' name='create_game_quantity' id='create_game_quantity' min='0' required />
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Game</h2>
+<form class='cuForm' id='update_game_form'>
+    <label for='update_game_id'>Game to Update: </label>
+    <select name='update_game_id' id='update_game_id' required>
+        <option value='' disabled selected>Select a Game</option>
+        {{#each Games}}
+        <option value='{{this.gameID}}' required>
+            {{this.gameID}} - {{this.gameName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_game_genre'>Genre: </label>
+    <select name='update_game_genre' id='update_game_genre'>
+        <option value='NULL' disabled selected>Select a Genre</option>
+        <option value='NULL'>&lt; None &gt;</option>
+        {{#each genres}}
+        <option value='{{this.genreID}}' required>
+            {{this.genreName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_game_quantity'>Quantity: </label>
+    <input type='number' name='update_game_quantity' id='update_game_quantity' min='0' />
+
+    <label for='update_game_min'>Min Players: </label>
+    <input type='number' name='update_game_min' id='update_game_min' min='1' />
+
+    <label for='update_game_max'>Max Players: </label>
+    <input type='number' name='update_game_max' id='update_game_max' min='1' />
+
+    <input type='submit' />
+</form>
