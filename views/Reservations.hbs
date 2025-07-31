@@ -3,7 +3,7 @@
 {{! Roll the Dice Database }}
 {{! For Reservations }}
 {{! Citations: }}
-{{!Structures and Setup:}} 
+{{!Structures and Setup:}}
 {{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
 {{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
 {{! Handlebar: }}
@@ -25,8 +25,9 @@
         {{#each Reservations}}
         <tr>
             <td>{{this.reservationID}}</td>
-            <td>{{this.patronID}}</td>
+            <td>{{this.gameID}}</td>
             <td>{{this.tableID}}</td>
+            <td>{{this.patronID}}</td>
             <td>{{this.date}}</td>
             <td>{{this.timeStart}}</td>
             <td>{{this.timeEnd}}</td>
@@ -46,6 +47,9 @@
 <form class="cuForm" id="create_reservation_form" method="POST">
     <label for="create_patron_id">Patron ID:</label>
     <input type="number" name="create_patron_id" id="create_patron_id" required />
+
+    <label for="create_game_id">Game ID:</label>
+    <input type="number" name="create_game_id" id="create_game_id" required />
 
     <label for="create_table_id">Table ID:</label>
     <input type="number" name="create_table_id" id="create_table_id" required />
@@ -77,6 +81,9 @@
 
     <label for="update_patron_id">New Patron ID:</label>
     <input type="number" name="update_patron_id" id="update_patron_id" required />
+
+    <label for="update_game_id">New Game ID:</label>
+    <input type="number" name="update_game_id" id="update_game_id" required />
 
     <label for="update_table_id">New Table ID:</label>
     <input type="number" name="update_table_id" id="update_table_id" required />
