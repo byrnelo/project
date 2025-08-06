@@ -1,0 +1,88 @@
+{{!Lorraine Byrne and Suhayl Khan }}
+{{! CS 340 Summer 2025 }}
+{{! Roll the Dice Database }}
+{{! For GamesGenres }}
+{{! Citations: }}
+{{! Structures and Setup:}}
+{{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
+{{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
+{{! Handlebar: }}
+{{! https://handlebarsjs.com/guide/ }}
+<h1>Games Genres</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        <tr>
+            {{#each GamesGenres.[0]}}
+            <th>{{@key}}</th>
+            {{/each}}
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each GamesGenres}}
+        <tr>
+            <td>{{this.gameName}}</td>
+            <td>{{this.genreName}}</td>
+            <form id="delete_gamesGenres_form">
+                <input type="hidden" name="delete_gamesGenres_gameID" value="{{this.gameID}}">
+                <input type="hidden" name="delete_gamesGenres_genreID" value="{{this.genreID}}">
+                <td><button type="submit">Delete</button></td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Add a Genre to a Game</h2>
+<form class="cuForm" id="create_gamesGenres_form">
+    <label for="create_gamesGenres_gameID">Game: </label>
+    <select name="create_gamesGenres_gameID" id="create_gamesGenres_gameID" required>
+        <option value="" disabled selected>Select a Game</option>
+        {{#each Games}}
+        <option value="{{this.gameName}}" required>
+            {{this.gameID}} - {{this.gameName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for="create_gamesGenres_genreID">Genre: </label>
+    <select name="create_gamesGenres_genreID" id="create_gamesGenres_genreID" required>
+        <option value="" disabled selected>Select a Genre</option>
+        {{#each Genres}}
+        <option value="{{this.genreName}}" required>
+            {{this.genreID}} - {{this.genreName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Game's Genre</h2>
+<form class="cuForm" id="update_gamesGenres_form">
+    <label for="update_gamesGenres_gameName">Game Genre to Update: </label>
+    <select name="update_gamesGenres_gameName" id="update_gamesGenres_gameName" required>
+        <option value="" disabled selected>Select a Game and its Genre</option>
+        {{#each GamesGenres}}
+        <option value="{{this.gameName}}-{{this.genreName}}" required>
+            {{this.gameName}} - {{this.genreName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for="update_gamesGenres_genreID">Update Genre to: </label>
+    <select name="update_gamesGenres_genreID" id="update_gamesGenres_genreID">
+        <option value="" disabled selected>Select a Genre</option>
+        {{#each Genres}}
+        <option value="{{this.genreID}}" required>
+            {{this.genreID}} - {{this.genreName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>

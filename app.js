@@ -43,15 +43,7 @@ app.get('/', async function (req, res) {
 
 app.get('/Games', async function (req, res) {
   try {
-    const query = `
-        SELECT Games.gameID, Games.gameName, Games.description, Genres.genreName, Games.minPlayer, Games.maxPlayer, Games.quantity
-        FROM Games
-        LEFT OUTER JOIN GamesGenres ON Games.gameID = GamesGenres.gameID
-        LEFT OUTER JOIN Genres ON GamesGenres.genreID = Genres.genreID
-        ORDER BY Games.gameID;
-        `;
-    const [games] = await db.query(query);
-
+    const [games] = await db.query('SELECT * FROM Games');
     res.render('Games', { Games: games });
   } catch (error) {
     console.error('Error executing queries:', error);
@@ -68,6 +60,27 @@ app.get('/Genres', async function (req, res) {
         res.status(500).send('An error occurred while loading the Genres page.');
     }
 });
+
+app.get('/GamesGenres', async function (req, res) {
+    try {
+        const query1 = `
+            SELECT Games.gameName, Genres.genreName
+            FROM GamesGenres
+            JOIN Games ON GamesGenres.gameID = Games.gameID
+            JOIN Genres ON GamesGenres.genreID = Genres.genreID
+            ORDER BY GamesGenres.gameID;
+            `;
+        const query2 = `SELECT gameID, gameName FROM Games`
+        const query3 = `SELECT genreID, genreName FROM Genres`
+        const [gamesGenres] = await db.query(query1);
+        const [games] = await db.query(query2)
+        const [genres] = await db.query(query3)
+        res.render('GamesGenres', { GamesGenres: gamesGenres, Games: games, Genres: genres });
+    } catch (error) {
+        console.error('Error retrieving gamesgenres:', error);
+        res.status(500).send('An error occured while loading the GamesGenres page.')
+    }
+})
 
 app.get('/Tables', async function (req, res) {
     try {
@@ -99,7 +112,37 @@ app.get('/Reservations', async function (req, res) {
     }
 });
 
+// RESET Route
+app.post('/Reset', async function (req, res) {
+    try {
+        const query = `CALL sp_load_gamesdb();`;
+        await db.query(query);
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error resetting database:', error);
+        res.status(500).send('An error occurred while resetting the database.');
+    }
+});
 
+// CREATE Routes
+app.post('/Genres/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_genre(?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [data.create_genre_name]);
+
+        console.log(`CREATE Genres. ID: ${row.new_id} ` +
+            `Genre: ${data.create_genre_name}`
+        );
+
+        res.redirect('/Genres');
+    } catch (error) {
+        console.error('Error creating genre:', error);
+        res.status(500).send('An error occurred while creating a Genre.');
+    }
+})
 
 // ########################################
 // ########## LISTENER

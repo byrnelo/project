@@ -29,7 +29,6 @@
             <td>{{this.gameID}}</td>
             <td>{{this.gameName}}</td>
             <td>{{this.description}}</td>
-            <td>{{this.genreName}}</td>
             <td>{{this.minPlayer}}</td>
             <td>{{this.maxPlayer}}</td>
             <td>{{this.quantity}}</td>
@@ -52,15 +51,6 @@
 
     <label for='create_game_description'>Description:</label>
     <input type='text' name='create_game_description' id='create_game_description' />
-
-    <label for='create_game_genre'>Genre:</label>
-    <select name='create_game_genre' id='create_game_genre'>
-        <option value='NULL' selected>Select a Genre</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each genres}}
-        <option value='{{this.genreID}}'>{{this.genreName}}</option>
-        {{/each}}
-    </select>
 
     <label for='create_game_min'>Min Players:</label>
     <input type='number' name='create_game_min' id='create_game_min' min='1' required />
@@ -87,25 +77,17 @@
         {{/each}}
     </select>
 
-    <label for='update_game_genre'>Genre: </label>
-    <select name='update_game_genre' id='update_game_genre'>
-        <option value='NULL' disabled selected>Select a Genre</option>
-        <option value='NULL'>&lt; None &gt;</option>
-        {{#each genres}}
-        <option value='{{this.genreID}}' required>
-            {{this.genreName}}
-        </option>
-        {{/each}}
-    </select>
-
-    <label for='update_game_quantity'>Quantity: </label>
-    <input type='number' name='update_game_quantity' id='update_game_quantity' min='0' />
+    <label for="update_game_description">Description: </label>
+    <input type="text" name="update_game_description" id="update_game_description">
 
     <label for='update_game_min'>Min Players: </label>
     <input type='number' name='update_game_min' id='update_game_min' min='1' />
 
     <label for='update_game_max'>Max Players: </label>
     <input type='number' name='update_game_max' id='update_game_max' min='1' />
+
+    <label for='update_game_quantity'>Quantity: </label>
+    <input type='number' name='update_game_quantity' id='update_game_quantity' min='0' />
 
     <input type='submit' />
 </form>
