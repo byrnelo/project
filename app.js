@@ -112,7 +112,17 @@ app.get('/Reservations', async function (req, res) {
     }
 });
 
-
+// RESET Route
+app.post('/Reset', async function (req, res) {
+    try {
+        const query = `CALL sp_load_gamesdb();`;
+        await db.query(query);
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error resetting database:', error);
+        res.status(500).send('An error occurred while resetting the database.');
+    }
+})
 
 // ########################################
 // ########## LISTENER
