@@ -43,15 +43,7 @@ app.get('/', async function (req, res) {
 
 app.get('/Games', async function (req, res) {
   try {
-    const query = `
-        SELECT Games.gameID, Games.gameName, Games.description, Genres.genreName, Games.minPlayer, Games.maxPlayer, Games.quantity
-        FROM Games
-        LEFT OUTER JOIN GamesGenres ON Games.gameID = GamesGenres.gameID
-        LEFT OUTER JOIN Genres ON GamesGenres.genreID = Genres.genreID
-        ORDER BY Games.gameID;
-        `;
-    const [games] = await db.query(query);
-
+    const [games] = await db.query('SELECT * FROM Games');
     res.render('Games', { Games: games });
   } catch (error) {
     console.error('Error executing queries:', error);
@@ -71,15 +63,19 @@ app.get('/Genres', async function (req, res) {
 
 app.get('/GamesGenres', async function (req, res) {
     try {
-        const query = `
+        const query1 = `
             SELECT Games.gameName, Genres.genreName
             FROM GamesGenres
             JOIN Games ON GamesGenres.gameID = Games.gameID
             JOIN Genres ON GamesGenres.genreID = Genres.genreID
             ORDER BY GamesGenres.gameID;
             `;
-        const [gamesGenres] = await db.query(query);
-        res.render('GamesGenres', { GamesGenres: gamesGenres });
+        const query2 = `SELECT gameID, gameName FROM Games`
+        const query3 = `SELECT genreID, genreName FROM Genres`
+        const [gamesGenres] = await db.query(query1);
+        const [games] = await db.query(query2)
+        const [genres] = await db.query(query3)
+        res.render('GamesGenres', { GamesGenres: gamesGenres, Games: games, Genres: genres });
     } catch (error) {
         console.error('Error retrieving gamesgenres:', error);
         res.status(500).send('An error occured while loading the GamesGenres page.')
