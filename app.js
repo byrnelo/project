@@ -122,6 +122,26 @@ app.post('/Reset', async function (req, res) {
         console.error('Error resetting database:', error);
         res.status(500).send('An error occurred while resetting the database.');
     }
+});
+
+// CREATE Routes
+app.post('/Genres/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_genre(?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [data.create_genre_name]);
+
+        console.log(`CREATE Genres. ID: ${row.new_id} ` +
+            `Genre: ${data.create_genre_name}`
+        );
+
+        res.redirect('/Genres');
+    } catch (error) {
+        console.error('Error creating genre:', error);
+        res.status(500).send('An error occurred while creating a Genre.');
+    }
 })
 
 // ########################################
