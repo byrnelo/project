@@ -69,6 +69,23 @@ app.get('/Genres', async function (req, res) {
     }
 });
 
+app.get('/GamesGenres', async function (req, res) {
+    try {
+        const query = `
+            SELECT Games.gameName, Genres.genreName
+            FROM GamesGenres
+            JOIN Games ON GamesGenres.gameID = Games.gameID
+            JOIN Genres ON GamesGenres.genreID = Genres.genreID
+            ORDER BY GamesGenres.gameID;
+            `;
+        const [gamesGenres] = await db.query(query);
+        res.render('GamesGenres', { GamesGenres: gamesGenres });
+    } catch (error) {
+        console.error('Error retrieving gamesgenres:', error);
+        res.status(500).send('An error occured while loading the GamesGenres page.')
+    }
+})
+
 app.get('/Tables', async function (req, res) {
     try {
         const [tables] = await db.query('SELECT * FROM Tables;');
