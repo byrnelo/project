@@ -42,13 +42,13 @@ app.get('/', async function (req, res) {
 });
 
 app.get('/Games', async function (req, res) {
-  try {
-    const [games] = await db.query('SELECT * FROM Games');
-    res.render('Games', { Games: games });
-  } catch (error) {
-    console.error('Error executing queries:', error);
-    res.status(500).send('An error occurred while executing the database queries.');
-  }
+    try {
+        const [games] = await db.query('SELECT * FROM Games');
+        res.render('Games', { Games: games });
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        res.status(500).send('An error occurred while executing the database queries.');
+    }
 });
 
 app.get('/Genres', async function (req, res) {
@@ -150,7 +150,7 @@ app.post('/Genres/Create', async function (req, res) {
 app.listen(PORT, function () {
     console.log(
         'Express started on http://localhost:' +
-            PORT +
-            '; press Ctrl-C to terminate.'
+        PORT +
+        '; press Ctrl-C to terminate.'
     );
 });
