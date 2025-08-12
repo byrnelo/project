@@ -27,14 +27,14 @@ quantity: int, not NULL
 genreID: int, auto_increment, unique, not NULL, PK
 genreName: varchar, not NULL 
 
-**Relationship 1:** a 1:M relationship between Games and Reservations is implemented with the gameID as a FK in the Reservations table.
-**Relationship 2:** a M:N relationship between Games and Genres is implemented with the gameID and genreID as FKs in GamesGenres intersection table.
+*Relationship 1:* a 1:M relationship between Games and Reservations is implemented with the gameID as a FK in the Reservations table.
+*Relationship 2:* a M:N relationship between Games and Genres is implemented with the gameID and genreID as FKs in GamesGenres intersection table.
 
 **Tables**: Tabled available for patrons to sit and play a board game either solo or with a group.
 tableID: int, auto_increment, unique, not NULL, PK
 maxSeating: int, not NULL
 
-**Relationship 1:** a 1:M relationship between Tables and Reservations with the tableID as the FK inside of Reservations.
+*Relationship 1:* a 1:M relationship between Tables and Reservations with the tableID as the FK inside of Reservations.
 
 **Patrons**: Patron information for people looking to utilzie the cafe space and check out a game and a table.
 patronID: int, auto_increment, unique, not NULL, PK 
@@ -43,7 +43,7 @@ lastName: varchar, not NULL
 phoneNumber: varchar, not NULL
 email: varchar, not NULL
 
-**Relationship 1:** a 1:M relationship between Patrons and Reservations is implemented with patronID as a FK inside of Reservations.
+*Relationship 1:* a 1:M relationship between Patrons and Reservations is implemented with patronID as a FK inside of Reservations.
 
 **Reservations**: Reservations of patrons looking to utilize the space
 reservationID: int, auto_increment, unique, not NULL, PK
@@ -54,17 +54,17 @@ date: date, not NULL
 timeStart: time, not NULL
 timeEnd: time, not NULL
 
-**Relationship 1:** a 1:M relationship between Patrons and Reservations is implemented with patronID as a FK inside of Reservations.
-**Relationship 2:** a 1:M relationship between Tables and Reservations is implemented with tableID as a FK inside of Reservations.
-**Relationship 3:** a 1:M relationship between Games and Reservations is implemented with gameID as a FK inside of Reservations.
+*Relationship 1:* a 1:M relationship between Patrons and Reservations is implemented with patronID as a FK inside of Reservations.
+*Relationship 2:* a 1:M relationship between Tables and Reservations is implemented with tableID as a FK inside of Reservations.
+*Relationship 3:* a 1:M relationship between Games and Reservations is implemented with gameID as a FK inside of Reservations.
 
 **Games Genres**: Intersection table representing the many-to-many relationship between the Games and Genres entities.
 reservationID: int, auto_increment, unique, not NULL, PK
 gameID: int, not NULL, FK
 genreID: int, not NULL, FK
 
-**Relationship 1:** a 1:M relationship between Games and GamesGenres is implemented with gameID as a FK inside GamesGenres.
-**Relationship 2:**  a 1:M relationship between Genres and GamesGenres is implemented with genreID as a FK inside GamesGenres.
+*Relationship 1:* a 1:M relationship between Games and GamesGenres is implemented with gameID as a FK inside GamesGenres.
+*Relationship 2:*  a 1:M relationship between Genres and GamesGenres is implemented with genreID as a FK inside GamesGenres.
 
 ## Schema 
 ![Schema for DB](./schema.png)
@@ -78,5 +78,11 @@ genreID: int, not NULL, FK
 * Build and Run with Forever: `npm run production`
 * Stop Forever Production Run: `npm run stop production`
 
-  Citations:
+## Citations:
+Structures and Setup taken from Canvas 
+* Activity 2 - Connect webapp to database: https://canvas.oregonstate.edu/courses/2007765/assignments/10118865
+* Exploration - Web Application Technology: https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612
+
+Handlebar: 
+https://handlebarsjs.com/guide/
   
