@@ -67,7 +67,7 @@ genreID: int, not NULL, FK
 **Relationship 2:**  a 1:M relationship between Genres and GamesGenres is implemented with genreID as a FK inside GamesGenres.
 
 ## Schema 
-![Alt Text]./schema.png)
+![Schema for DB](./schema.png)
 
 ## Run Modes
 ### Local
