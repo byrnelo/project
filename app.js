@@ -125,6 +125,31 @@ app.post('/Reset', async function (req, res) {
 });
 
 // CREATE Routes
+app.post('/Games/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_game(?, ?, ?, ?, ?, @new_id)`;
+
+        const [[[row]]] = await db.query(query, [
+            data.create_game_name,
+            data.create_game_description,
+            data.create_game_min,
+            data.create_game_max,
+            data.create_game_quantity
+        ]);
+
+        console.log(`CREATE Games. ID: ${row.new_id} ` +
+            `Game: ${data.create_game_name}`
+        );
+
+        res.redirect('/Games');
+    } catch (error) {
+        console.error('Error creating game:', error);
+        res.status(500).send('An error occurred while creating a Game.');
+    }
+})
+
 app.post('/Genres/Create', async function (req, res) {
     try {
         let data = req.body;
