@@ -33,7 +33,7 @@
             <td>{{this.maxPlayer}}</td>
             <td>{{this.quantity}}</td>
 
-            <form id="delete_games_form">
+            <form id="delete_games_form" method="POST" action="/Games/Delete">
                 <input type="hidden" name="delete_games_id" value="{{this.gameID}}" />
                 <input type="hidden" name="delete_games_name" value="{{this.gameName}}" />
                 <td><button type="submit">Delete</button></td>

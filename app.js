@@ -406,6 +406,24 @@ app.post('/Reservations/Update', async function (req, res) {
     }
 })
 
+// DELETE ROUTES
+app.post('/Games/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_game(?)`;
+
+        await db.query(query, [data.delete_games_id]);
+
+        console.log(`DELETE Games. ID: ${data.delete_games_id}`);
+
+        res.redirect('/Games');
+    } catch (error) {
+        console.error('Error deleting game:', error);
+        res.status(500).send('An error occurred while deleting a Game.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
