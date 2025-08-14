@@ -30,7 +30,7 @@
             <td>{{this.phoneNumber}}</td>
             <td>{{this.email}}</td>
             <td>
-                <form class="delete-form" method="POST">
+                <form class="delete-form" method="POST" action="/Patrons/Delete">
                     <input type="hidden" name="delete_patron_id" value="{{this.patronID}}" />
                     <button type="submit">Delete</button>
                 </form>

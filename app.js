@@ -64,7 +64,7 @@ app.get('/Genres', async function (req, res) {
 app.get('/GamesGenres', async function (req, res) {
     try {
         const query1 = `
-            SELECT Games.gameName, Genres.genreName
+            SELECT GamesGenres.gameID, Games.gameName, GamesGenres.genreID, Genres.genreName
             FROM GamesGenres
             JOIN Games ON GamesGenres.gameID = Games.gameID
             JOIN Genres ON GamesGenres.genreID = Genres.genreID
@@ -403,6 +403,114 @@ app.post('/Reservations/Update', async function (req, res) {
     } catch (error) {
         console.error('Error updating reservation:', error);
         res.status(500).send('An error occurred while updating a Reservation.');
+    }
+})
+
+// DELETE ROUTES
+app.post('/Games/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_game(?)`;
+
+        await db.query(query, [data.delete_games_id]);
+
+        console.log(`DELETE Games. ID: ${data.delete_games_id}`);
+
+        res.redirect('/Games');
+    } catch (error) {
+        console.error('Error deleting game:', error);
+        res.status(500).send('An error occurred while deleting a Game.');
+    }
+})
+
+app.post('/Genres/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_genre(?)`;
+
+        await db.query(query, [data.delete_genres_id]);
+
+        console.log(`DELETE Genres. ID: ${data.delete_genres_id}`);
+
+        res.redirect('/Genres');
+    } catch (error) {
+        console.error('Error deleting genre:', error);
+        res.status(500).send('An error occurred while deleting a Genre.');
+    }
+})
+
+app.post('/GamesGenres/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_gamegenre(?, ?)`;
+
+        await db.query(query, [
+            data.delete_gamesGenres_gameID,
+            data.delete_gamesGenres_genreID
+        ]);
+
+        console.log(`DELETE GamesGenres. Game ID: ${data.delete_gamesGenres_gameID} ` +
+            `Genre ID: ${data.delete_gamesGenres_genreID}`
+        );
+
+        res.redirect('/GamesGenres');
+    } catch (error) {
+        console.error('Error deleting game genre:', error);
+        res.status(500).send('An error occurred while deleting a GameGenre.');
+    }
+})
+
+app.post('/Tables/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_table(?)`;
+
+        await db.query(query, [data.delete_table_id]);
+
+        console.log(`DELETE Tables. ID: ${data.delete_table_id}`);
+
+        res.redirect('/Tables');
+    } catch (error) {
+        console.error('Error deleting table:', error);
+        res.status(500).send('An error occurred while deleting a Table.');
+    }
+})
+
+app.post('/Patrons/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_patron(?)`;
+
+        await db.query(query, [data.delete_patron_id]);
+
+        console.log(`DELETE Patron. ID: ${data.delete_patron_id}`);
+
+        res.redirect('/Patrons');
+    } catch (error) {
+        console.error('Error deleting patron:', error);
+        res.status(500).send('An error occurred while deleting a Patron.');
+    }
+})
+
+app.post('/Reservations/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_reservation(?)`;
+
+        await db.query(query, [data.delete_reservation_id]);
+
+        console.log(`DELETE Reservation. ID: ${data.delete_reservation_id}`);
+
+        res.redirect('/Reservations');
+    } catch (error) {
+        console.error('Error deleting reservation:', error);
+        res.status(500).send('An error occurred while deleting a Reservation.');
     }
 })
 
