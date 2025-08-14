@@ -3,7 +3,7 @@
 {{! Roll the Dice Database }}
 {{! For Tables }}
 {{! Citations: }}
-{{!Structures and Setup:}} 
+{{!Structures and Setup:}}
 {{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
 {{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
 {{! Handlebar: }}
@@ -39,7 +39,7 @@
 
 {{! CREATE form }}
 <h2>Add a Table</h2>
-<form class="cuForm" id="create_table_form" method="POST">
+<form class="cuForm" id="create_table_form" method="POST" action="/Tables/Create">
     <label for="create_max_seating">Max Seating:</label>
     <input type="number" name="create_max_seating" id="create_max_seating" required />
     <input type="submit" value="Add Table" />

@@ -192,6 +192,25 @@ app.post('/GamesGenres/Create', async function (req, res) {
     }
 })
 
+app.post('/Tables/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_table(?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [data.create_max_seating]);
+
+        console.log(`CREATE Table. ID: ${row.new_id} ` +
+            `Max Seating: ${data.create_max_seating}`
+        );
+
+        res.redirect('/Tables');
+    } catch (error) {
+        console.error('Error creating table:', error);
+        res.status(500).send('An error occurred while creating a Table.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
