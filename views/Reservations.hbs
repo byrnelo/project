@@ -15,19 +15,23 @@
 <table>
     <thead>
         <tr>
-            {{#each Reservations.[0]}}
-            <th>{{@key}}</th>
-            {{/each}}
-            <th>Actions</th>
+            <th>ID</th>
+            <th>Patron</th>
+            <th>Game</th>
+            <th>Table ID</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         {{#each Reservations}}
         <tr>
             <td>{{this.reservationID}}</td>
-            <td>{{this.gameID}}</td>
+            <td>{{this.firstName}} {{this.lastName}}</td>
+            <td>{{this.gameName}}</td>
             <td>{{this.tableID}}</td>
-            <td>{{this.patronID}}</td>
             <td>{{this.date}}</td>
             <td>{{this.timeStart}}</td>
             <td>{{this.timeEnd}}</td>
@@ -45,14 +49,35 @@
 {{! CREATE form }}
 <h2>Add a Reservation</h2>
 <form class="cuForm" id="create_reservation_form" method="POST" action="/Reservations/Create">
-    <label for="create_patron_id">Patron ID:</label>
-    <input type="number" name="create_patron_id" id="create_patron_id" required />
+    <label for="create_patron_id">Patron:</label>
+    <select name="create_patron_id" id="create_patron_id">
+        <option value="" disabled selected>Select a Patron</option>
+        {{#each Patrons}}
+        <option value="{{this.patronID}}" required>
+            {{this.patronID}} - {{this.firstName}} {{this.lastName}}
+        </option>
+        {{/each}}
+    </select>
 
-    <label for="create_game_id">Game ID:</label>
-    <input type="number" name="create_game_id" id="create_game_id" required />
+    <label for="create_game_id">Game:</label>
+    <select name="create_game_id" id="create_game_id">
+        <option value="" disabled selected>Select a Game</option>
+        {{#each Games}}
+        <option value="{{this.gameID}}" required>
+            {{this.gameID}} - {{this.gameName}}
+        </option>
+        {{/each}}
+    </select>
 
-    <label for="create_table_id">Table ID:</label>
-    <input type="number" name="create_table_id" id="create_table_id" required />
+    <label for="create_table_id">Table:</label>
+    <select name="create_table_id" id="create_table_id">
+        <option value="" disabled selected>Select a Table</option>
+        {{#each Tables}}
+        <option value="{{this.tableID}}" required>
+            Table {{this.tableID}} - Seats {{this.maxSeating}}
+        </option>
+        {{/each}}
+    </select>
 
     <label for="create_date">Date:</label>
     <input type="date" name="create_date" id="create_date" required />
@@ -74,19 +99,40 @@
         <option value="" disabled selected>Select a Reservation</option>
         {{#each Reservations}}
         <option value="{{this.reservationID}}">
-            Reservation {{this.reservationID}} (Patron {{this.patronID}}, Table {{this.tableID}})
+            Reservation {{this.reservationID}} - {{this.date}}
         </option>
         {{/each}}
     </select>
 
-    <label for="update_patron_id">New Patron ID:</label>
-    <input type="number" name="update_patron_id" id="update_patron_id" required />
+    <label for="update_patron_id">Patron:</label>
+    <select name="update_patron_id" id="update_patron_id">
+        <option value="" disabled selected>Select a Patron</option>
+        {{#each Patrons}}
+        <option value="{{this.patronID}}" required>
+            {{this.patronID}} - {{this.firstName}} {{this.lastName}}
+        </option>
+        {{/each}}
+    </select>
 
-    <label for="update_game_id">New Game ID:</label>
-    <input type="number" name="update_game_id" id="update_game_id" required />
+    <label for="update_game_id">Game:</label>
+    <select name="update_game_id" id="update_game_id">
+        <option value="" disabled selected>Select a Game</option>
+        {{#each Games}}
+        <option value="{{this.gameID}}" required>
+            {{this.gameID}} - {{this.gameName}}
+        </option>
+        {{/each}}
+    </select>
 
-    <label for="update_table_id">New Table ID:</label>
-    <input type="number" name="update_table_id" id="update_table_id" required />
+    <label for="update_table_id">Table:</label>
+    <select name="update_table_id" id="update_table_id">
+        <option value="" disabled selected>Select a Table</option>
+        {{#each Tables}}
+        <option value="{{this.tableID}}" required>
+            Table {{this.tableID}} - Seats {{this.maxSeating}}
+        </option>
+        {{/each}}
+    </select>
 
     <label for="update_date">New Date:</label>
     <input type="date" name="update_date" id="update_date" required />

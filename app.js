@@ -69,9 +69,9 @@ app.get('/GamesGenres', async function (req, res) {
             JOIN Games ON GamesGenres.gameID = Games.gameID
             JOIN Genres ON GamesGenres.genreID = Genres.genreID
             ORDER BY GamesGenres.gameID;
-            `;
-        const query2 = `SELECT gameID, gameName FROM Games`
-        const query3 = `SELECT genreID, genreName FROM Genres ORDER BY genreID ASC`
+        `;
+        const query2 = `SELECT gameID, gameName FROM Games ORDER BY gameID ASC;`
+        const query3 = `SELECT genreID, genreName FROM Genres ORDER BY genreID ASC;`
         const [gamesGenres] = await db.query(query1);
         const [games] = await db.query(query2)
         const [genres] = await db.query(query3)
@@ -104,8 +104,22 @@ app.get('/Patrons', async function (req, res) {
 
 app.get('/Reservations', async function (req, res) {
     try {
-        const [reservations] = await db.query('SELECT * FROM Reservations;');
-        res.render('Reservations', { Reservations: reservations });
+        const query1 = `SELECT * FROM v_reservations;`;
+        const query2 = `SELECT patronID, firstName, lastName FROM Patrons;`;
+        const query3 = `SELECT gameID, gameName FROM Games;`;
+        const query4 = `SELECT tableID, maxSeating FROM Tables;`;
+
+        const [reservations] = await db.query(query1);
+        const [patrons] = await db.query(query2);
+        const [games] = await db.query(query3);
+        const [tables] = await db.query(query4);
+
+        res.render('Reservations', {
+            Reservations: reservations,
+            Patrons: patrons,
+            Games: games,
+            Tables: tables
+        });
     } catch (error) {
         console.error('Error retrieving reservations:', error);
         res.status(500).send('An error occurred while loading the Reservations page.');
