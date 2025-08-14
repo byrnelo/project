@@ -169,6 +169,29 @@ app.post('/Genres/Create', async function (req, res) {
     }
 })
 
+app.post('/GamesGenres/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_gamegenre(?, ?);`;
+
+        await db.query(query, [
+            data.create_gamesGenres_gameID,
+            data.create_gamesGenres_genreID
+        ]);
+
+        console.log(`
+            CREATE GamesGenres. gameID: ${data.create_gamesGenres_gameID}
+            associated with genreID: ${data.create_gamesGenres_genreID}
+        `);
+
+        res.redirect('/GamesGenres');
+    } catch (error) {
+        console.error('Error creating game genre relationship:', error);
+        res.status(500).send('An error occurred while creating a GameGenre.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 

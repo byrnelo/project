@@ -37,12 +37,12 @@
 
 {{! CREATE form }}
 <h2>Add a Genre to a Game</h2>
-<form class="cuForm" id="create_gamesGenres_form">
+<form class="cuForm" id="create_gamesGenres_form" method="POST" action="/GamesGenres/Create">
     <label for="create_gamesGenres_gameID">Game: </label>
     <select name="create_gamesGenres_gameID" id="create_gamesGenres_gameID" required>
         <option value="" disabled selected>Select a Game</option>
         {{#each Games}}
-        <option value="{{this.gameName}}" required>
+        <option value="{{this.gameID}}" required>
             {{this.gameID}} - {{this.gameName}}
         </option>
         {{/each}}
@@ -52,7 +52,7 @@
     <select name="create_gamesGenres_genreID" id="create_gamesGenres_genreID" required>
         <option value="" disabled selected>Select a Genre</option>
         {{#each Genres}}
-        <option value="{{this.genreName}}" required>
+        <option value="{{this.genreID}}" required>
             {{this.genreID}} - {{this.genreName}}
         </option>
         {{/each}}
