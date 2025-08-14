@@ -14,12 +14,13 @@
 <table>
     <thead>
         <tr>
-            {{#each Games.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th>Actions</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Min Players</th>
+            <th>Max Players</th>
+            <th>Quantity</th>
+            <th>Action</th>
         </tr>
     </thead>
 
@@ -44,7 +45,7 @@
 </table>
 
 {{! CREATE form }}
-<h2>Add a Games</h2>
+<h2>Add a Game</h2>
 <form class='cuForm' id='create_game_form' method='POST' action='/Games/Create'>
     <label for='create_game_name'>Game:</label>
     <input type='text' name='create_game_name' id='create_game_name' required />
