@@ -53,7 +53,7 @@ app.get('/Games', async function (req, res) {
 
 app.get('/Genres', async function (req, res) {
     try {
-        const [genres] = await db.query('SELECT * FROM Genres;');
+        const [genres] = await db.query('SELECT * FROM Genres ORDER BY genreID ASC;');
         res.render('Genres', { Genres: genres });
     } catch (error) {
         console.error('Error retrieving genres:', error);
