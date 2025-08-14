@@ -66,7 +66,7 @@
 
 {{! UPDATE form }}
 <h2>Update a Game</h2>
-<form class='cuForm' id='update_game_form'>
+<form class='cuForm' id='update_game_form' method='POST' action='/Games/Update'>
     <label for='update_game_id'>Game to Update: </label>
     <select name='update_game_id' id='update_game_id' required>
         <option value='' disabled selected>Select a Game</option>
@@ -76,6 +76,9 @@
         </option>
         {{/each}}
     </select>
+
+    <label for="update_game_name">Name: </label>
+    <input type="text" name="update_game_name" id="update_game_name">
 
     <label for="update_game_description">Description: </label>
     <input type="text" name="update_game_description" id="update_game_description">
