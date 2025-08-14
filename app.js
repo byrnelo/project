@@ -235,6 +235,32 @@ app.post('/Patrons/Create', async function (req, res) {
     }
 })
 
+app.post('/Reservations/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_reservation(?, ?, ?, ?, ?, ?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [
+            data.create_patron_id,
+            data.create_table_id,
+            data.create_game_id,
+            data.create_date,
+            data.create_time_start,
+            data.create_time_end,
+        ]);
+
+        console.log(`CREATE Reservation. ID: ${row.new_id} ` +
+            `Date: ${data.create_date} at ${data.create_time_start}`
+        );
+
+        res.redirect('/Reservations');
+    } catch (error) {
+        console.error('Error creating reservation:', error);
+        res.status(500).send('An error occurred while creating a Reservation.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
