@@ -463,6 +463,23 @@ app.post('/GamesGenres/Delete', async function (req, res) {
     }
 })
 
+app.post('/Tables/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_table(?)`;
+
+        await db.query(query, [data.delete_table_id]);
+
+        console.log(`DELETE Tables. ID: ${data.delete_table_id}`);
+
+        res.redirect('/Tables');
+    } catch (error) {
+        console.error('Error deleting table:', error);
+        res.status(500).send('An error occurred while deleting a Table.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 

@@ -27,7 +27,7 @@
             <td>{{this.tableID}}</td>
             <td>{{this.maxSeating}}</td>
             <td>
-                <form class="delete-form" method="POST">
+                <form class="delete-form" method="POST" action="/Tables/Delete">
                     <input type="hidden" name="delete_table_id" value="{{this.tableID}}" />
                     <button type="submit">Delete</button>
                 </form>
