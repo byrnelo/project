@@ -120,5 +120,5 @@ https://handlebarsjs.com/guide/
 
 AI Use:
 ReadME: Help with streamlining these entities and attributes so it is aesthetic on the page.
-
+Other uses of AI noted in the citations of each file
   
