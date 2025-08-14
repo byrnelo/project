@@ -424,6 +424,23 @@ app.post('/Games/Delete', async function (req, res) {
     }
 })
 
+app.post('/Genres/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_genre(?)`;
+
+        await db.query(query, [data.delete_genres_id]);
+
+        console.log(`DELETE Genres. ID: ${data.delete_genres_id}`);
+
+        res.redirect('/Genres');
+    } catch (error) {
+        console.error('Error deleting genre:', error);
+        res.status(500).send('An error occurred while deleting a Genre.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
