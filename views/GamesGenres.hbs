@@ -63,12 +63,12 @@
 
 {{! UPDATE form }}
 <h2>Update a Game's Genre</h2>
-<form class="cuForm" id="update_gamesGenres_form">
-    <label for="update_gamesGenres_gameName">Game Genre to Update: </label>
-    <select name="update_gamesGenres_gameName" id="update_gamesGenres_gameName" required>
+<form class="cuForm" id="update_gamesGenres_form" method="POST" action="/GamesGenres/Update">
+    <label for="update_gamesGenres_gameGenreName">Game Genre to Update: </label>
+    <select name="update_gamesGenres_gameGenreName" id="update_gamesGenres_gameGenreName" required>
         <option value="" disabled selected>Select a Game and its Genre</option>
         {{#each GamesGenres}}
-        <option value="{{this.gameName}}-{{this.genreName}}" required>
+        <option value="{{this.gameName}}+{{this.genreName}}" required>
             {{this.gameName}} - {{this.genreName}}
         </option>
         {{/each}}

@@ -71,7 +71,7 @@ app.get('/GamesGenres', async function (req, res) {
             ORDER BY GamesGenres.gameID;
             `;
         const query2 = `SELECT gameID, gameName FROM Games`
-        const query3 = `SELECT genreID, genreName FROM Genres`
+        const query3 = `SELECT genreID, genreName FROM Genres ORDER BY genreID ASC`
         const [gamesGenres] = await db.query(query1);
         const [games] = await db.query(query2)
         const [genres] = await db.query(query3)
@@ -307,6 +307,28 @@ app.post('/Genres/Update', async function (req, res) {
     } catch (error) {
         console.error('Error updating game:', error);
         res.status(500).send('An error occurred while updating a Game.');
+    }
+})
+
+app.post('/GamesGenres/Update', async function (req, res) {
+    try {
+        let data = req.body;
+        const [gameName, genreName] = data.update_gamesGenres_gameGenreName.split('+');
+
+        const query = `CALL sp_update_gamegenre(?, ?, ?)`;
+
+        await db.query(query, [
+            gameName,
+            genreName,
+            data.update_gamesGenres_genreID
+        ]);
+
+        console.log(`UPDATE GamesGenres. ${gameName} genre updated`);
+
+        res.redirect('/GamesGenres');
+    } catch (error) {
+        console.error('Error updating game genre:', error);
+        res.status(500).send('An error occurred while updating a GameGenre.');
     }
 })
 
