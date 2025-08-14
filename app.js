@@ -288,6 +288,28 @@ app.post('/Games/Update', async function (req, res) {
     }
 })
 
+app.post('/Genres/Update', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_update_genre(?, ?)`;
+
+        await db.query(query, [
+            data.update_genre_id,
+            data.update_genre_name
+        ])
+
+        console.log(`UPDATE Genres. ID: ${data.update_genre_id} ` +
+            `Genre: ${data.update_genre_name}`
+        );
+
+        res.redirect('/Genres');
+    } catch (error) {
+        console.error('Error updating game:', error);
+        res.status(500).send('An error occurred while updating a Game.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
