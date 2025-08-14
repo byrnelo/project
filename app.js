@@ -354,6 +354,31 @@ app.post('/Tables/Update', async function (req, res) {
     }
 })
 
+app.post('/Patrons/Update', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_update_patron(?, ?, ?, ?, ?)`;
+
+        await db.query(query, [
+            data.update_patron_id,
+            data.update_first_name,
+            data.update_last_name,
+            data.update_phone_number,
+            data.update_email
+        ]);
+
+        console.log(`UPDATE Patrons. ID: ${data.update_patron_id} ` +
+            `Patron: ${data.update_first_name} ${data.update_last_name}`
+        );
+
+        res.redirect('/Patrons');
+    } catch (error) {
+        console.error('Error updating patron:', error);
+        res.status(500).send('An error occurred while updating a Patron.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
