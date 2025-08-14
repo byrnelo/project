@@ -497,6 +497,23 @@ app.post('/Patrons/Delete', async function (req, res) {
     }
 })
 
+app.post('/Reservations/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_reservation(?)`;
+
+        await db.query(query, [data.delete_reservation_id]);
+
+        console.log(`DELETE Reservation. ID: ${data.delete_reservation_id}`);
+
+        res.redirect('/Reservations');
+    } catch (error) {
+        console.error('Error deleting reservation:', error);
+        res.status(500).send('An error occurred while deleting a Reservation.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
