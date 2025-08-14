@@ -111,6 +111,7 @@ Intersection table linking games to genres.
 * Stop Forever Production Run: `npm run stop production`
 
 ## Citations:
+Date: 8/14/2025
 Structures and Setup taken from Canvas 
 * Activity 2 - Connect webapp to database: https://canvas.oregonstate.edu/courses/2007765/assignments/10118865
 * Exploration - Web Application Technology: https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612

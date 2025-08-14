@@ -2,6 +2,7 @@
 // CS 340 Summer 2025
 // Roll the Dice Database
 // Citations:
+// 8/14/2025
 // Structures and Setup:
 // https://canvas.oregonstate.edu/courses/2007765/assignments/10118865
 // https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612

@@ -1,6 +1,7 @@
 // Lorraine Byrne and Suhayl Khan
 // CS 340 Summer 2025
 // Roll the Dice Database
+// Date: 08/14/2025
 // Citations:
 // Followed complete structure of https://canvas.oregonstate.edu/courses/2007765/assignments/10118865
 // No AI used
