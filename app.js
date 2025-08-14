@@ -64,7 +64,7 @@ app.get('/Genres', async function (req, res) {
 app.get('/GamesGenres', async function (req, res) {
     try {
         const query1 = `
-            SELECT Games.gameName, Genres.genreName
+            SELECT GamesGenres.gameID, Games.gameName, GamesGenres.genreID, Genres.genreName
             FROM GamesGenres
             JOIN Games ON GamesGenres.gameID = Games.gameID
             JOIN Genres ON GamesGenres.genreID = Genres.genreID
@@ -438,6 +438,28 @@ app.post('/Genres/Delete', async function (req, res) {
     } catch (error) {
         console.error('Error deleting genre:', error);
         res.status(500).send('An error occurred while deleting a Genre.');
+    }
+})
+
+app.post('/GamesGenres/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_gamegenre(?, ?)`;
+
+        await db.query(query, [
+            data.delete_gamesGenres_gameID,
+            data.delete_gamesGenres_genreID
+        ]);
+
+        console.log(`DELETE GamesGenres. Game ID: ${data.delete_gamesGenres_gameID} ` +
+            `Genre ID: ${data.delete_gamesGenres_genreID}`
+        );
+
+        res.redirect('/GamesGenres');
+    } catch (error) {
+        console.error('Error deleting game genre:', error);
+        res.status(500).send('An error occurred while deleting a GameGenre.');
     }
 })
 

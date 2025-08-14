@@ -14,9 +14,8 @@
 <table>
     <thead>
         <tr>
-            {{#each GamesGenres.[0]}}
-            <th>{{@key}}</th>
-            {{/each}}
+            <th>gameName</th>
+            <th>genreName</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -25,7 +24,7 @@
         <tr>
             <td>{{this.gameName}}</td>
             <td>{{this.genreName}}</td>
-            <form id="delete_gamesGenres_form">
+            <form id="delete_gamesGenres_form" method="POST" action="/GamesGenres/Delete">
                 <input type="hidden" name="delete_gamesGenres_gameID" value="{{this.gameID}}">
                 <input type="hidden" name="delete_gamesGenres_genreID" value="{{this.genreID}}">
                 <td><button type="submit">Delete</button></td>
