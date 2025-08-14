@@ -480,6 +480,23 @@ app.post('/Tables/Delete', async function (req, res) {
     }
 })
 
+app.post('/Patrons/Delete', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_delete_patron(?)`;
+
+        await db.query(query, [data.delete_patron_id]);
+
+        console.log(`DELETE Patron. ID: ${data.delete_patron_id}`);
+
+        res.redirect('/Patrons');
+    } catch (error) {
+        console.error('Error deleting patron:', error);
+        res.status(500).send('An error occurred while deleting a Patron.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
