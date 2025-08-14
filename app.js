@@ -332,6 +332,28 @@ app.post('/GamesGenres/Update', async function (req, res) {
     }
 })
 
+app.post('/Tables/Update', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_update_table(?, ?)`;
+
+        await db.query(query, [
+            data.update_table_id,
+            data.update_max_seating
+        ]);
+
+        console.log(`UPDATE Tables. ID: ${data.update_table_id} ` +
+            `Max Seating: ${data.update_max_seating}`
+        );
+
+        res.redirect('/Tables');
+    } catch (error) {
+        console.error('Error updating table:', error);
+        res.status(500).send('An error occurred while updating a Table.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
