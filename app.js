@@ -112,7 +112,7 @@ app.get('/Reservations', async function (req, res) {
     }
 });
 
-// RESET Route
+// RESET ROUTE
 app.post('/Reset', async function (req, res) {
     try {
         const query = `CALL sp_load_gamesdb();`;
@@ -124,7 +124,7 @@ app.post('/Reset', async function (req, res) {
     }
 });
 
-// CREATE Routes
+// CREATE ROUTES
 app.post('/Games/Create', async function (req, res) {
     try {
         let data = req.body;
@@ -258,6 +258,33 @@ app.post('/Reservations/Create', async function (req, res) {
     } catch (error) {
         console.error('Error creating reservation:', error);
         res.status(500).send('An error occurred while creating a Reservation.');
+    }
+})
+
+// UPDATE ROUTES
+app.post('/Games/Update', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_update_game(?, ?, ?, ?, ?, ?)`;
+
+        await db.query(query, [
+            data.update_game_id,
+            data.update_game_name,
+            data.update_game_description,
+            data.update_game_min,
+            data.update_game_max,
+            data.update_game_quantity
+        ])
+
+        console.log(`UPDATE Games. ID: ${data.update_game_id} ` +
+            `Game: ${data.update_game_name}`
+        );
+
+        res.redirect('/Games');
+    } catch (error) {
+        console.error('Error updating game:', error);
+        res.status(500).send('An error occurred while updating a Game.');
     }
 })
 
