@@ -125,6 +125,31 @@ app.post('/Reset', async function (req, res) {
 });
 
 // CREATE Routes
+app.post('/Games/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_game(?, ?, ?, ?, ?, @new_id)`;
+
+        const [[[row]]] = await db.query(query, [
+            data.create_game_name,
+            data.create_game_description,
+            data.create_game_min,
+            data.create_game_max,
+            data.create_game_quantity
+        ]);
+
+        console.log(`CREATE Games. ID: ${row.new_id} ` +
+            `Game: ${data.create_game_name}`
+        );
+
+        res.redirect('/Games');
+    } catch (error) {
+        console.error('Error creating game:', error);
+        res.status(500).send('An error occurred while creating a Game.');
+    }
+})
+
 app.post('/Genres/Create', async function (req, res) {
     try {
         let data = req.body;
@@ -141,6 +166,98 @@ app.post('/Genres/Create', async function (req, res) {
     } catch (error) {
         console.error('Error creating genre:', error);
         res.status(500).send('An error occurred while creating a Genre.');
+    }
+})
+
+app.post('/GamesGenres/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_gamegenre(?, ?);`;
+
+        await db.query(query, [
+            data.create_gamesGenres_gameID,
+            data.create_gamesGenres_genreID
+        ]);
+
+        console.log(`
+            CREATE GamesGenres. gameID: ${data.create_gamesGenres_gameID}
+            associated with genreID: ${data.create_gamesGenres_genreID}
+        `);
+
+        res.redirect('/GamesGenres');
+    } catch (error) {
+        console.error('Error creating game genre relationship:', error);
+        res.status(500).send('An error occurred while creating a GameGenre.');
+    }
+})
+
+app.post('/Tables/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_table(?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [data.create_max_seating]);
+
+        console.log(`CREATE Table. ID: ${row.new_id} ` +
+            `Max Seating: ${data.create_max_seating}`
+        );
+
+        res.redirect('/Tables');
+    } catch (error) {
+        console.error('Error creating table:', error);
+        res.status(500).send('An error occurred while creating a Table.');
+    }
+})
+
+app.post('/Patrons/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_patron(?, ?, ?, ?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [
+            data.create_first_name,
+            data.create_last_name,
+            data.create_phone_number,
+            data.create_email
+        ]);
+
+        console.log(`CREATE Patron. ID: ${row.new_id} ` +
+            `Patron: ${data.create_first_name} ${data.create_last_name}`
+        );
+
+        res.redirect('/Patrons');
+    } catch (error) {
+        console.error('Error creating patron:', error);
+        res.status(500).send('An error occurred while creating a Patron.');
+    }
+})
+
+app.post('/Reservations/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_reservation(?, ?, ?, ?, ?, ?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [
+            data.create_patron_id,
+            data.create_table_id,
+            data.create_game_id,
+            data.create_date,
+            data.create_time_start,
+            data.create_time_end,
+        ]);
+
+        console.log(`CREATE Reservation. ID: ${row.new_id} ` +
+            `Date: ${data.create_date} at ${data.create_time_start}`
+        );
+
+        res.redirect('/Reservations');
+    } catch (error) {
+        console.error('Error creating reservation:', error);
+        res.status(500).send('An error occurred while creating a Reservation.');
     }
 })
 

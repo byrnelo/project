@@ -3,7 +3,7 @@
 {{! Roll the Dice Database }}
 {{! For Games }}
 {{! Citations: }}
-{{!Structures and Setup:}} 
+{{!Structures and Setup:}}
 {{! https://canvas.oregonstate.edu/courses/2007765/assignments/10118865 }}
 {{! https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612 }}
 {{! Handlebar: }}
@@ -42,7 +42,7 @@
 
 {{! CREATE form }}
 <h2>Add a Patron</h2>
-<form class="cuForm" id="create_patron_form" method="POST">
+<form class="cuForm" id="create_patron_form" method="POST" action="/Patrons/Create">
     <label for="create_first_name">First Name:</label>
     <input type="text" name="create_first_name" id="create_first_name" required />
 
@@ -50,7 +50,7 @@
     <input type="text" name="create_last_name" id="create_last_name" required />
 
     <label for="create_phone_number">Phone Number:</label>
-    <input type="text" name="create_phone_number" id="create_phone_number" required />
+    <input type="tel" name="create_phone_number" id="create_phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required />
 
     <label for="create_email">Email:</label>
     <input type="email" name="create_email" id="create_email" required />
