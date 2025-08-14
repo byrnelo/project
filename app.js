@@ -3,7 +3,7 @@
 // Roll the Dice Database
 // Citations:
 // Structures and Setup:
-//https://canvas.oregonstate.edu/courses/2007765/assignments/10118865
+// https://canvas.oregonstate.edu/courses/2007765/assignments/10118865
 // https://canvas.oregonstate.edu/courses/2007765/pages/exploration-web-application-technology-2?module_item_id=25664612
 // Handlebar:
 // https://handlebarsjs.com/guide/

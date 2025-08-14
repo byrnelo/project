@@ -1,3 +1,10 @@
+// Lorraine Byrne and Suhayl Khan
+// CS 340 Summer 2025
+// Roll the Dice Database
+// Citations:
+// Followed complete structure of https://canvas.oregonstate.edu/courses/2007765/assignments/10118865
+// No AI used
+
 // Get an instance of mysql we can use in the app
 let mysql = require('mysql2')
 
