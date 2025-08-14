@@ -379,6 +379,33 @@ app.post('/Patrons/Update', async function (req, res) {
     }
 })
 
+app.post('/Reservations/Update', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_update_reservation(?, ?, ?, ?, ?, ?, ?)`;
+
+        await db.query(query, [
+            data.update_reservation_id,
+            data.update_game_id,
+            data.update_table_id,
+            data.update_patron_id,
+            data.update_date,
+            data.update_time_start,
+            data.update_time_end
+        ]);
+
+        console.log(`UPDATE Reservations. ID: ${data.update_reservation_id} ` +
+            `Date: ${data.update_date} at ${data.update_time_start}`
+        );
+
+        res.redirect('/Reservations');
+    } catch (error) {
+        console.error('Error updating reservation:', error);
+        res.status(500).send('An error occurred while updating a Reservation.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
