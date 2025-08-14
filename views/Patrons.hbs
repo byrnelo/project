@@ -15,10 +15,12 @@
 <table>
     <thead>
         <tr>
-            {{#each Patrons.[0]}}
-            <th>{{@key}}</th>
-            {{/each}}
-            <th>Actions</th>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -78,7 +80,7 @@
     <input type="text" name="update_last_name" id="update_last_name" required />
 
     <label for="update_phone_number">New Phone Number:</label>
-    <input type="text" name="update_phone_number" id="update_phone_number" required />
+    <input type="tel" name="update_phone_number" id="update_phone_number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required />
 
     <label for="update_email">New Email:</label>
     <input type="email" name="update_email" id="update_email" required />
