@@ -211,6 +211,30 @@ app.post('/Tables/Create', async function (req, res) {
     }
 })
 
+app.post('/Patrons/Create', async function (req, res) {
+    try {
+        let data = req.body;
+
+        const query = `CALL sp_create_patron(?, ?, ?, ?, @new_id);`;
+
+        const [[[row]]] = await db.query(query, [
+            data.create_first_name,
+            data.create_last_name,
+            data.create_phone_number,
+            data.create_email
+        ]);
+
+        console.log(`CREATE Patron. ID: ${row.new_id} ` +
+            `Patron: ${data.create_first_name} ${data.create_last_name}`
+        );
+
+        res.redirect('/Patrons');
+    } catch (error) {
+        console.error('Error creating patron:', error);
+        res.status(500).send('An error occurred while creating a Patron.');
+    }
+})
+
 // ########################################
 // ########## LISTENER
 
